@@ -13,3 +13,7 @@
 	height: 20px;
 	background-color: red;
 }
+
+.tetromino-space {
+	background-color: blue;
+}
