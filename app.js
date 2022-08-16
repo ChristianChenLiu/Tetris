@@ -76,4 +76,50 @@ document.addEventListener("DOMContentLoaded", () => {
 		sTetromino,
 		zTetromino
 	];
+
+	let currentPosition = 4;
+	let currentTetromino = tetrominoes[0][0];
+
+	function draw() {
+		currentTetromino.forEach((index) => {
+			squares[currentPosition + index].classList.add("tetromino-space");
+		});
+	}
+
+	function undraw() {
+		currentTetromino.forEach((index) => {
+			squares[currentPosition + index].classList.remove(
+				"tetromino-space"
+			);
+		});
+	}
+
+	function moveDown() {
+		undraw();
+		currentPosition += width;
+		draw();
+		freeze();
+	}
+
+	function freeze() {
+		if (
+			currentTetromino.some((index) =>
+				squares[currentPosition + index + width].classList.contains(
+					"taken"
+				)
+			)
+		) {
+			currentTetromino.forEach((index) =>
+				squares[currentPosition + index].classList.add("taken")
+			);
+			random = math.floor(Math.random() * tetrominoes.length);
+			currentTetromino = tetrominoes[random][0];
+			currentPosition = 4;
+			draw();
+		}
+	}
+
+	draw();
+
+	timerId = setInterval(moveDown, 500);
 });
