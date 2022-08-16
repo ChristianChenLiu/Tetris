@@ -1,6 +1,6 @@
 /** @format */
 
-document.addEventListener("DOMContentLoad", () => {
+document.addEventListener("DOMContentLoaded", () => {
 	const grid = document.querySelector(".tetris-grid-board");
 	let squares = Array.from(
 		document.querySelectorAll(".tetris-grid-board div")
