@@ -119,6 +119,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
+	function moveLeft() {
+		const isAtLeftEdge = currentTetromino.some(
+			(index) => (currentPosition + index) % width === 0
+		);
+
+		const isLeftTaken = currentTetromino.some((index) =>
+			squares[currentPosition + index - 1].classList.contains("taken")
+		);
+
+		//Only moves left if not at left edge and not blocked at left by another tetromino
+		if (!isAtLeftEdge && !isLeftTaken) {
+			undraw();
+			currentPosition -= 1;
+			draw();
+		}
+	}
 	draw();
 
 	//Listen to when a key is pressed
