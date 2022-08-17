@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const scoreDisplay = document.querySelector("#score");
 	const startButton = document.querySelector("#start-button");
 	const width = 10;
+	const currentRotation = 0;
 
 	//Tetris pieces (formally: tetrominoes)
 	//I shaped tetromino
@@ -78,7 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	];
 
 	let currentPosition = 4;
-	let currentTetromino = tetrominoes[0][0];
+	let currentTetromino =
+		tetrominoes[Math.floor(Math.random() * tetrominoes.length)][
+			currentRotation
+		];
 
 	function draw() {
 		currentTetromino.forEach((index) => {
