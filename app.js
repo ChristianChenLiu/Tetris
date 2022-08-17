@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentTetromino.forEach((index) =>
 				squares[currentPosition + index].classList.add("taken")
 			);
-			random = math.floor(Math.random() * tetrominoes.length);
+			random = Math.floor(Math.random() * tetrominoes.length);
 			currentTetromino = tetrominoes[random][0];
 			currentPosition = 4;
 			draw();
@@ -121,5 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	draw();
 
-	timerId = setInterval(moveDown, 500);
+	//Listen to when a key is pressed
+	document.addEventListener("keyup", control);
+
+	timerId = setInterval(moveDown, 200);
 });
