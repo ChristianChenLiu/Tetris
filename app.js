@@ -135,6 +135,23 @@ document.addEventListener("DOMContentLoaded", () => {
 			draw();
 		}
 	}
+
+	function moveRight() {
+		const isAtRightEdge = currentTetromino.some(
+			(index) => (currentPosition + index) % width === width - 1
+		);
+
+		const isRightTaken = currentTetromino.some((index) =>
+			squares[currentPosition + index + 1].classList.contains("taken")
+		);
+
+		//Only moves right if not at right edge and not blocked at right by another tetromino
+		if (!isAtRightEdge && !isRightTaken) {
+			undraw();
+			currentPosition += 1;
+			draw();
+		}
+	}
 	draw();
 
 	//Listen to when a key is pressed
