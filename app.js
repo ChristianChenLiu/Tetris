@@ -152,6 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
 			draw();
 		}
 	}
+
+	function control(e) {
+		if (e.key === "ArrowLeft") {
+			//Move Left
+			moveLeft();
+		} else if (e.key === "ArrowUp") {
+			//rotate
+		} else if (e.key === "ArrowDown") {
+			//Move down
+			moveDown();
+		} else if (e.key === "ArrowRight") {
+			//Move right
+			moveRight();
+		}
+		//Check if the move was frame perfect
+		freeze();
+	}
+
 	draw();
 
 	//Listen to when a key is pressed
