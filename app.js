@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	const startButton = document.querySelector("#start-button");
 	const width = 10;
 	const currentRotation = 0;
+	const numberOfRotations = 4;
+	const startingPosition = 4;
 
 	//Tetris pieces (formally: tetrominoes)
 	//I shaped tetromino
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		zTetromino
 	];
 
-	let currentPosition = 4;
+	let currentPosition = startingPosition;
 	let currentTetromino =
 		tetrominoes[Math.floor(Math.random() * tetrominoes.length)][
 			currentRotation
@@ -155,6 +157,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentPosition += 1;
 			draw();
 		}
+	}
+
+	function rotate() {
+		undraw();
+		currentRotation += 1;
+		if (currentRotation === numberOfRotations) {
+			currentRotation = 0;
+		}
+		currentTetromino = tetrominoes[###][currentRotation];
+		draw();
 	}
 
 	function control(e) {
