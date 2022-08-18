@@ -81,10 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	];
 
 	let currentPosition = startingPosition;
-	let currentTetromino =
-		tetrominoes[Math.floor(Math.random() * tetrominoes.length)][
-			currentRotation
-		];
+	let randomTetrominoShape = Math.floor(Math.random() * tetrominoes.length);
+	let currentTetromino = tetrominoes[randomTetrominoShape][currentRotation];
 
 	function draw() {
 		currentTetromino.forEach((index) => {
@@ -118,8 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentTetromino.forEach((index) =>
 				squares[currentPosition + index].classList.add("taken")
 			);
-			random = Math.floor(Math.random() * tetrominoes.length);
-			currentTetromino = tetrominoes[random][0];
+			randomTetrominoShape = Math.floor(
+				Math.random() * tetrominoes.length
+			);
+			currentTetromino = tetrominoes[randomTetrominoShape][0];
 			currentPosition = 4;
 			draw();
 		}
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (currentRotation === numberOfRotations) {
 			currentRotation = 0;
 		}
-		currentTetromino = tetrominoes[###][currentRotation];
+		currentTetromino = tetrominoes[randomTetrominoShape][currentRotation];
 		draw();
 	}
 
