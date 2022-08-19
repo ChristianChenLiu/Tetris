@@ -170,12 +170,14 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentTetromino.forEach((index) =>
 				squares[currentPosition + index].classList.add("taken")
 			);
-			randomTetrominoShape = Math.floor(
+			randomTetrominoShape = nextRandomTetromino;
+			currentTetromino = tetrominoes[randomTetrominoShape][0];
+			nextRandomTetromino = Math.floor(
 				Math.random() * tetrominoes.length
 			);
-			currentTetromino = tetrominoes[randomTetrominoShape][0];
 			currentPosition = 4;
 			draw();
+			displayShape();
 		}
 	}
 
@@ -240,10 +242,29 @@ document.addEventListener("DOMContentLoaded", () => {
 		freeze();
 	}
 
+	//mini-grid next piece display
+	const displaySquares = document.querySelectorAll(".mini-grid div");
+	const displayWidth = 4;
+	let nextRandomTetromino = Math.floor(Math.random() * tetrominoes.length);
+	const displayTetrominoes = tetrominoesCreation(displayWidth);
+
+	function displayShape() {
+		displaySquares.forEach((square) => {
+			square.classList.remove("tetromino-space");
+		});
+		displayTetrominoes[nextRandomTetromino][0].forEach((index) => {
+			displaySquares[index].classList.add("tetromino-space");
+		});
+	}
+
+	startButton.addEventListener("click", () => {});
+
 	draw();
 
 	//Listen to when a key is pressed
 	document.addEventListener("keyup", control);
 
 	timerId = setInterval(moveDown, 200);
+
+	displayShape();
 });
