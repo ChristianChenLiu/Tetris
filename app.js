@@ -176,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				Math.random() * tetrominoes.length
 			);
 			currentPosition = 4;
+			addScore();
 			draw();
 			displayShape();
 		}
@@ -270,6 +271,34 @@ document.addEventListener("DOMContentLoaded", () => {
 			timerId = setInterval(moveDown, 200);
 		}
 	});
+
+	let scoreCounter = 0;
+	let takenCounter;
+
+	function addScore() {
+		for (let i = 0; i < squares.length - width; i += width) {
+			takenCounter = 0;
+			for (let j = i; j < i + width; j += 1) {
+				if (squares[j].classList.contains("taken")) {
+					takenCounter += 1;
+				}
+			}
+
+			if (takenCounter >= width) {
+				scoreCounter += 10;
+				scoreDisplay.innerHTML = scoreCounter;
+				for (let j = i; j < i + width; j += 1) {
+					squares[j].classList.remove("taken");
+					squares[j].classList.remove("tetromino");
+				}
+				const squaresRemoved = squares.splice(i, width);
+				squares = squaresRemoved.concat(squares);
+				squares.forEach((square) => {
+					grid.appendChild(square);
+				});
+			}
+		}
+	}
 
 	draw();
 
