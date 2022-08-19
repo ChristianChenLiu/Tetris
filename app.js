@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	const scoreDisplay = document.querySelector("#score");
 	const startButton = document.querySelector("#start-button");
 	const width = 10;
-	const currentRotation = 0;
 	const numberOfRotations = 4;
 	const startingPosition = 4;
 
@@ -134,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const tetrominoes = tetrominoesCreation(width);
 
+	let currentRotation = 0;
 	let currentPosition = startingPosition;
 	let randomTetrominoShape = Math.floor(Math.random() * tetrominoes.length);
 	let currentTetromino = tetrominoes[randomTetrominoShape][currentRotation];
@@ -231,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			moveLeft();
 		} else if (e.key === "ArrowUp") {
 			//rotate
+			rotate();
 		} else if (e.key === "ArrowDown") {
 			//Move down
 			moveDown();
