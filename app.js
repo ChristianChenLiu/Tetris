@@ -250,15 +250,26 @@ document.addEventListener("DOMContentLoaded", () => {
 	const displayTetrominoes = tetrominoesCreation(displayWidth);
 
 	function displayShape() {
-		displaySquares.forEach((square) => {
-			square.classList.remove("tetromino-space");
-		});
+		clearNextShape();
 		displayTetrominoes[nextRandomTetromino][0].forEach((index) => {
 			displaySquares[index].classList.add("tetromino-space");
 		});
 	}
 
-	startButton.addEventListener("click", () => {});
+	function clearNextShape() {
+		displaySquares.forEach((square) => {
+			square.classList.remove("tetromino-space");
+		});
+	}
+
+	startButton.addEventListener("click", () => {
+		if (timerId) {
+			clearInterval(timerId);
+			timerId = null;
+		} else {
+			timerId = setInterval(moveDown, 200);
+		}
+	});
 
 	draw();
 
