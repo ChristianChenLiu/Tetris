@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				)
 			)
 		) {
+			gameOver();
 			currentTetromino.forEach((index) =>
 				squares[currentPosition + index].classList.add("taken")
 			);
@@ -297,6 +298,18 @@ document.addEventListener("DOMContentLoaded", () => {
 					grid.appendChild(square);
 				});
 			}
+		}
+	}
+
+	function gameOver() {
+		if (
+			currentTetromino.some((index) =>
+				squares[currentPosition + index].classList.contains("taken")
+			)
+		) {
+			scoreDisplay.innerHTML = "END";
+			clearInterval(timerId);
+			clearNextShape();
 		}
 	}
 
