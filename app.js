@@ -12,73 +12,127 @@ document.addEventListener("DOMContentLoaded", () => {
 	const numberOfRotations = 4;
 	const startingPosition = 4;
 
-	//Tetris pieces (formally: tetrominoes)
-	//I shaped tetromino
-	const iTetromino = [
-		[width, 1 + width, 2 + width, 3 + width],
-		[2, 2 + width, 2 + width * 2, 2 + width * 3],
-		[width * 2, 1 + width * 2, 2 + width * 2, 3 + width * 2],
-		[1, 1 + width, 1 + width * 2, 1 + width * 3]
-	];
+	//Tetris pieces function (formally: tetrominoes)
+	function tetrominoesCreation(tetrominoWidth) {
+		//I shaped tetromino
+		const iTetromino = [
+			[
+				tetrominoWidth,
+				1 + tetrominoWidth,
+				2 + tetrominoWidth,
+				3 + tetrominoWidth
+			],
+			[
+				2,
+				2 + tetrominoWidth,
+				2 + tetrominoWidth * 2,
+				2 + tetrominoWidth * 3
+			],
+			[
+				tetrominoWidth * 2,
+				1 + tetrominoWidth * 2,
+				2 + tetrominoWidth * 2,
+				3 + tetrominoWidth * 2
+			],
+			[
+				1,
+				1 + tetrominoWidth,
+				1 + tetrominoWidth * 2,
+				1 + tetrominoWidth * 3
+			]
+		];
 
-	//square shaped tetromino
-	const oTetromino = [
-		//for ease, just putting the same rotation 4 times
-		[0, 1, width, 1 + width],
-		[0, 1, width, 1 + width],
-		[0, 1, width, 1 + width],
-		[0, 1, width, 1 + width]
-	];
+		//square shaped tetromino
+		const oTetromino = [
+			//for ease, just putting the same rotation 4 times
+			[0, 1, tetrominoWidth, 1 + tetrominoWidth],
+			[0, 1, tetrominoWidth, 1 + tetrominoWidth],
+			[0, 1, tetrominoWidth, 1 + tetrominoWidth],
+			[0, 1, tetrominoWidth, 1 + tetrominoWidth]
+		];
 
-	//short t shaped tetromino
-	const tTetromino = [
-		[1, width, 1 + width, 2 + width],
-		[1, 1 + width, 2 + width, 1 + width * 2],
-		[width, 1 + width, 2 + width, 1 + width * 2],
-		[1, width, 1 + width, 1 + width * 2]
-	];
+		//short t shaped tetromino
+		const tTetromino = [
+			[1, tetrominoWidth, 1 + tetrominoWidth, 2 + tetrominoWidth],
+			[1, 1 + tetrominoWidth, 2 + tetrominoWidth, 1 + tetrominoWidth * 2],
+			[
+				tetrominoWidth,
+				1 + tetrominoWidth,
+				2 + tetrominoWidth,
+				1 + tetrominoWidth * 2
+			],
+			[1, tetrominoWidth, 1 + tetrominoWidth, 1 + tetrominoWidth * 2]
+		];
 
-	//j shaped tetromino (similar to L)
-	const jTetromino = [
-		[0, width, 1 + width, 2 + width],
-		[1, 2, 1 + width, 1 + width * 2],
-		[width, 1 + width, 2 + width, 2 + width * 2],
-		[1, 1 + width, width * 2, 1 + width * 2]
-	];
+		//j shaped tetromino (similar to L)
+		const jTetromino = [
+			[0, tetrominoWidth, 1 + tetrominoWidth, 2 + tetrominoWidth],
+			[1, 2, 1 + tetrominoWidth, 1 + tetrominoWidth * 2],
+			[
+				tetrominoWidth,
+				1 + tetrominoWidth,
+				2 + tetrominoWidth,
+				2 + tetrominoWidth * 2
+			],
+			[1, 1 + tetrominoWidth, tetrominoWidth * 2, 1 + tetrominoWidth * 2]
+		];
 
-	//L shaped tetromino
-	const lTetromino = [
-		[2, width, 1 + width, 2 + width],
-		[1, 1 + width, 1 + width * 2, 2 + width * 2],
-		[width, 1 + width, 2 + width, width * 2],
-		[0, 1, 1 + width, 1 + width * 2]
-	];
+		//L shaped tetromino
+		const lTetromino = [
+			[2, tetrominoWidth, 1 + tetrominoWidth, 2 + tetrominoWidth],
+			[
+				1,
+				1 + tetrominoWidth,
+				1 + tetrominoWidth * 2,
+				2 + tetrominoWidth * 2
+			],
+			[
+				tetrominoWidth,
+				1 + tetrominoWidth,
+				2 + tetrominoWidth,
+				tetrominoWidth * 2
+			],
+			[0, 1, 1 + tetrominoWidth, 1 + tetrominoWidth * 2]
+		];
 
-	//S shaped tetromino
-	const sTetromino = [
-		[1, 2, width, 1 + width],
-		[1, 1 + width, 2 + width, 2 + width * 2],
-		[1 + width, 2 + width, width * 2, 1 + width * 2],
-		[0, width, 1 + width, 1 + width * 2]
-	];
+		//S shaped tetromino
+		const sTetromino = [
+			[1, 2, tetrominoWidth, 1 + tetrominoWidth],
+			[1, 1 + tetrominoWidth, 2 + tetrominoWidth, 2 + tetrominoWidth * 2],
+			[
+				1 + tetrominoWidth,
+				2 + tetrominoWidth,
+				tetrominoWidth * 2,
+				1 + tetrominoWidth * 2
+			],
+			[0, tetrominoWidth, 1 + tetrominoWidth, 1 + tetrominoWidth * 2]
+		];
 
-	//Z shaped tetromino
-	const zTetromino = [
-		[0, 1, 1 + width, 2 + width],
-		[2, 1 + width, 2 + width, 1 + width * 2],
-		[width, 1 + width, 1 + width * 2, 2 + width * 2],
-		[1, width, 1 + width, width * 2]
-	];
+		//Z shaped tetromino
+		const zTetromino = [
+			[0, 1, 1 + tetrominoWidth, 2 + tetrominoWidth],
+			[2, 1 + tetrominoWidth, 2 + tetrominoWidth, 1 + tetrominoWidth * 2],
+			[
+				tetrominoWidth,
+				1 + tetrominoWidth,
+				1 + tetrominoWidth * 2,
+				2 + tetrominoWidth * 2
+			],
+			[1, tetrominoWidth, 1 + tetrominoWidth, tetrominoWidth * 2]
+		];
 
-	const tetrominoes = [
-		iTetromino,
-		oTetromino,
-		tTetromino,
-		jTetromino,
-		lTetromino,
-		sTetromino,
-		zTetromino
-	];
+		return [
+			iTetromino,
+			oTetromino,
+			tTetromino,
+			jTetromino,
+			lTetromino,
+			sTetromino,
+			zTetromino
+		];
+	}
+
+	const tetrominoes = tetrominoesCreation(width);
 
 	let currentPosition = startingPosition;
 	let randomTetrominoShape = Math.floor(Math.random() * tetrominoes.length);
